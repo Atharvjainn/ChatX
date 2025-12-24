@@ -1,4 +1,5 @@
 import User from '../models/User.js'
+import { sendWelcomemail } from '../utils/EmailHandler.js'
 import { hashpassword,generateToken } from '../utils/helperfns.js'
 
 
@@ -19,6 +20,8 @@ export const signup = async(req,res) => {
         const newUser = await User.create({
             fullName,email,password : hashedpassword
         })
+
+        sendWelcomemail(email,fullName,"http://localhost:3000")
 
         if(newUser){
             generateToken(newUser._id,res)
