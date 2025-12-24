@@ -1,6 +1,7 @@
 import express from "express";
 import { PORT } from "./config/serverConfig.js";
 import authRoutes from "./routes/auth-routes.js"
+import messageRoutes from './routes/message-routes.js'
 import { connectDB } from "./config/db.js";
 import cookieParser from "cookie-parser";
 const app = express();
@@ -10,6 +11,7 @@ app.use(express.urlencoded({extended : true}))
 app.use(cookieParser())
 
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
 
 const startServer = async () => {
