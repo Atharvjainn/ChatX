@@ -1,7 +1,7 @@
 import User from '../models/User.js'
 import { sendWelcomemail } from '../utils/EmailHandler.js'
 import { hashpassword,generateToken } from '../utils/helperfns.js'
-
+import bcrypt from 'bcrypt'
 
 export const signup = async(req,res) => {
     const {fullName,email,password} = req.body
@@ -47,4 +47,37 @@ export const signup = async(req,res) => {
 
 
 
+}
+
+export const login = async(req,res) => {
+    try {
+        const {email,password} = req.body;
+        const user = await User.findOne({email : email})
+
+        if(!user){
+            return res.status(400).json({
+                message : "User does not exist!"
+            })
+        }
+
+        const isPasswordMatch = await bcrypt.compare(password,user.password);
+        if(!isPasswordMatch){
+            return res.status(400).json({
+                message : "Invalid credentials!"
+            })
+        }
+        generateToken(user._id,res)
+
+         return res.status(200).json({
+                data : user,
+                message : "User logged in successfully!",
+                success : true,
+            })
+
+    } catch (error) {
+        console.log("Error in login controller!",error.message);
+        return res.status(500).json({
+            message : "Internal server error"
+        })
+    }
 }
