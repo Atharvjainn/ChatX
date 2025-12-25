@@ -8,7 +8,7 @@ export default function BackgroundWrapper({
   children,
 }: BackgroundWrapperProps) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#0b0f19] via-[#1b3b8a] to-[#ff4fa7]">
+    <div className="relative min-h-screen overflow-hidden bg-linear-to-b from-[#0b0f19] via-[#1b3b8a] to-[#ff4fa7]">
   
       <div
         className="absolute inset-0"
