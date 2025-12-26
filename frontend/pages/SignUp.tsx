@@ -69,7 +69,7 @@ export default function SignupPage() {
                   isSigningin ?
                   <LoaderIcon className='w-full h-7 animate-spin text-center text-white'/>
                   : 
-                  <Button variant="outline" className="w-full">Create Account</Button>
+                  <Button variant="outline" className="w-full cursor-pointer">Create Account</Button>
                 }
                 
                 <p className="text-center text-sm text-muted-foreground">

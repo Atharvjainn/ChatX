@@ -1,69 +1,86 @@
 "use client";
-
-import Image from "next/image";
+import {Field,FieldDescription,FieldGroup,FieldLabel,FieldLegend,FieldSet} from "@/components/ui/field"
+import { Mail,User,Lock,LoaderIcon } from "lucide-react"
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import AnimatedSearchBox from "@/components/AnimatedBox";
-import { FieldLegend } from "@/components/ui/field";
+import React, { useState } from "react";
+import { useAuthStore } from "@/store/useAuthStore";
+
 
 export default function SignupPage() {
+  const [formData,setFormData] = useState({email : "",password : ""});
+  const {isLogginingin,Login} = useAuthStore()
+
+  const handleSubmit = (e : React.FormEvent) => {
+    e.preventDefault();
+    Login(formData)
+  }
+
+
   return (
       <Card className="w-full max-w-4xl overflow-hidden bg-[#0b0f1a]/90 backdrop-blur-xl border border-white/10 shadow-2xl px-4">
         <CardContent className="grid md:grid-cols-2 p-0">
 
           {/* LEFT: FORM */}
           <div className="p-8 sm:px-5">
-            <h1 className="text-2xl font-semibold text-white mb-2">
-              Create Account
-            </h1>
-            <p className="text-sm text-muted-foreground mb-6">
-              Sign up to start chatting
-            </p>
-
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <Label htmlFor="fullname">Full Name</Label>
-                <Input
-                  id="fullname"
-                  placeholder="John Doe"
-                  className="bg-white/5 border-white/10 text-white"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="john@example.com"
-                  className="bg-white/5 border-white/10 text-white"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  className="bg-white/5 border-white/10 text-white"
-                />
-              </div>
-
-              <Button className="w-full mt-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90">
-                Sign Up
-              </Button>
-
-              <p className="text-sm text-center text-muted-foreground mt-4">
-                Already have an account?{" "}
-                <span className="text-purple-400 hover:underline cursor-pointer">
-                  Sign in
-                </span>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <FieldSet>
+                  <FieldLegend className="text-white text-2xl">Log in</FieldLegend>
+                  <FieldDescription className="text-base">Log in to continue chatting</FieldDescription>
+                  <FieldGroup>
+                  <Field>
+                    <FieldLabel htmlFor="Email">Email</FieldLabel>
+                    <div className="relative">
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input id="Email" type="Email" placeholder="Maxleither@gmail.com" className="pl-10"
+                       value={formData.email}
+                       onChange={(e) => setFormData({...formData,email : e.target.value})}
+                      />
+                    </div>
+                  </Field>
+                  <Field>
+                    <FieldLabel htmlFor="password">Password</FieldLabel>
+                    <div className="relative">
+                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input id="password" type="password" placeholder="••••••••" className="pl-10"
+                       value={formData.password}
+                       onChange={(e) => setFormData({...formData,password : e.target.value})}
+                      />
+                    </div>
+                    
+                  </Field>
+                  </FieldGroup>
+              </FieldSet>
+              <div className="flex flex-col items-center pt-4 gap-3">
+                {
+                  isLogginingin ?
+                  <LoaderIcon className='w-full h-7 animate-spin text-center text-white'/>
+                  : 
+                  <Button variant="outline" className="w-full cursor-pointer">Login</Button>
+                }
+                
+                <p className="text-center text-sm text-muted-foreground">
+                Don't have an account?{" "}
+                <Link
+                  href="/signup"
+                  className="font-medium underline-offset-4 hover:underline text-white"
+                >
+                  Signup
+                </Link>
               </p>
+              </div>
+              
+            </form>
+
+          
+
+
+            
+
             </div>
-          </div>
 
           {/* RIGHT: IMAGE */}
           <div className="relative hidden md:block">

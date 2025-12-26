@@ -9,13 +9,16 @@ type AuthStore = {
     isCheckingAuth : boolean,
     checkAuth : () => void,
     isSigningin : boolean,
+    isLogginingin : boolean,
     SignIn : (data : {email : string, fullName : string, password : string}) => void,
+    Login : (data : {email : string, password : string}) => void,
 }
 
 export const useAuthStore = create<AuthStore>((set) =>({
     authUser : null,
     isCheckingAuth : true,
     isSigningin : false,
+    isLogginingin : false,
 
     checkAuth : async () => {
         try {
@@ -34,12 +37,26 @@ export const useAuthStore = create<AuthStore>((set) =>({
         try {
             const response = await axiosInstance.post('/auth/signup',data)
             console.log(response);
-            set({authUser : response.data})
+            set({authUser : response.data.data})
             toast.success("Signed up successfully!")
         } catch (error : any) {
             toast.error(error.response.data.message)
         } finally {
             set({isSigningin : false})
+        }
+    },
+
+    Login : async(data : {email : string , password : string}) => {
+        set({isLogginingin : true})
+        try {
+            const response = await axiosInstance.post('/auth/login',data)
+            set({authUser : response.data})
+            toast.success("Logged in successfully!")
+        } catch (error : any) {
+            toast.error(error.response.data.message)
+        }
+        finally{
+            set({isLogginingin : false})
         }
     }
 
