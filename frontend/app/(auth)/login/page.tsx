@@ -1,4 +1,5 @@
 'use client'
+import PageLoader from '@/components/PageLoader'
 import Login from '@/pages/Login'
 import { useAuthStore } from '@/store/useAuthStore'
 import { redirect } from 'next/navigation'
@@ -12,7 +13,9 @@ const page = () => {
      },[checkAuth])
    
      //loader
-   
+     if(isCheckingAuth) return <PageLoader />
+     
+     //redirect if logged in
      if(authUser) redirect('/chats')
       
   return (
