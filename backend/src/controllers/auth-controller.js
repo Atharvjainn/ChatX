@@ -3,6 +3,7 @@ import { sendWelcomemail } from '../utils/EmailHandler.js'
 import { hashpassword,generateToken } from '../utils/helperfns.js'
 import bcrypt from 'bcrypt'
 import cloudinary from '../config/cloudinary.js'
+import { CLIENT_URL } from '../config/serverConfig.js'
 
 export const signup = async(req,res) => {
     const {fullName,email,password} = req.body
@@ -22,7 +23,7 @@ export const signup = async(req,res) => {
             fullName,email,password : hashedpassword
         })
 
-        sendWelcomemail(email,fullName,"http://localhost:3000")
+        // sendWelcomemail(email,fullName,CLIENT_URL)
 
         if(newUser){
             generateToken(newUser._id,res)

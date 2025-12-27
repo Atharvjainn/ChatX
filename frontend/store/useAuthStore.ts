@@ -2,7 +2,6 @@ import {create} from 'zustand';
 import {axiosInstance} from "../utils/axios"
 import type { User } from '../utils/types';
 import toast from 'react-hot-toast';
-import { log } from 'node:console';
 
 type AuthStore = {
     authUser : User|null,
@@ -12,6 +11,8 @@ type AuthStore = {
     isLogginingin : boolean,
     SignIn : (data : {email : string, fullName : string, password : string}) => void,
     Login : (data : {email : string, password : string}) => void,
+    Logout : () => void,
+    isLogginout : boolean,
 }
 
 export const useAuthStore = create<AuthStore>((set) =>({
@@ -19,6 +20,7 @@ export const useAuthStore = create<AuthStore>((set) =>({
     isCheckingAuth : true,
     isSigningin : false,
     isLogginingin : false,
+    isLogginout : false,
 
     checkAuth : async () => {
         try {
@@ -57,6 +59,19 @@ export const useAuthStore = create<AuthStore>((set) =>({
         }
         finally{
             set({isLogginingin : false})
+        }
+    },
+
+    Logout : async() => {
+        set({isLogginout : true})
+        try {
+            const res = await axiosInstance.post('/auth/logout')
+            set({authUser : null})
+            toast.success(res.data.message)
+        } catch (error : any) {
+            toast.error(error.response.data.message)
+        } finally {
+            set({isLogginout : false})
         }
     }
 
