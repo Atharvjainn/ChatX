@@ -12,7 +12,7 @@ type ChatStore = {
     chatPartners : any[],
     getChatPartners : () => void,
     selectedUser : User | null,
-    setSelectedUser : (user : User) => void,
+    setSelectedUser : (user : User | null) => void,
 }
 
 export const useChatStore = create<ChatStore>((set) => ({
@@ -50,7 +50,7 @@ export const useChatStore = create<ChatStore>((set) => ({
         }
     },
 
-    setSelectedUser : (user : User) => set({selectedUser : user})
+    setSelectedUser : (user : User | null) => set({selectedUser : user})
 
      
 

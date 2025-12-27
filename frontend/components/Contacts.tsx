@@ -25,9 +25,7 @@ const Contacts = () => {
                 ${selectedUser?._id === contact._id ? "bg-white/10" : "" }
               `}
             >
-              <div className="h-10 w-10 rounded-full bg-white/30 flex items-center justify-center">
-                {activeTab === "chats" ? "C" : "U"}
-              </div>
+              <img src={contact?.profilePic || "/avatar.png"} alt="" className='h-10 w-10 rounded-full flex items-center justify-center' />
 
               <div className="flex flex-col">
                 <span className="text-sm font-medium">
