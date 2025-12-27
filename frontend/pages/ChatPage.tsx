@@ -8,25 +8,21 @@ import Contacts from "@/components/Contacts"
 import { useAuthStore } from "@/store/useAuthStore"
 import { useChatStore } from "@/store/useChatStore"
 import ChatPartners from "@/components/ChatPartners"
+import ProfileHeader from "@/components/ProfileHeader"
 
 export default function ChatPage() {
   const {isLogginout,Logout} = useAuthStore()
   const { activeTab } = useChatStore()
 
   return (
-    <div className="flex h-10/12 w-full max-w-6xl bg-gradient-to-b backdrop-blur-lg from-black/20 via-black/40 to-black/90 shadow-lg overflow-hidden rounded-2xl">
+    <div className="flex h-10/12 w-full max-w-6xl bg-linear-to-b backdrop-blur-lg from-black/20 via-black/40 to-black/90 shadow-lg overflow-hidden rounded-2xl">
       
       {/* LEFT SIDEBAR */}
       <aside className="flex w-[320px] flex-col border-r border-white/10 bg-white/10 backdrop-blur-xl">
         
         {/* TOP BAR */}
-        <div className="flex items-center justify-between px-4 py-4">
-          <h2 className="text-lg font-semibold text-white">ChatX</h2>
-
-          <Button className="cursor-pointer rounded-md bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20" onClick={() => Logout()}>
-            Logout
-          </Button>
-        </div>
+        <ProfileHeader />
+        
 
         {/* TABS */}
         <ActiveTabSwitch />

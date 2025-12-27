@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 type AuthStore = {
     authUser : User|null,
     isCheckingAuth : boolean,
+    isUpdatingProfile : boolean,
     checkAuth : () => void,
     isSigningin : boolean,
     isLogginingin : boolean,
@@ -13,6 +14,7 @@ type AuthStore = {
     Login : (data : {email : string, password : string}) => void,
     Logout : () => void,
     isLogginout : boolean,
+    updateProfile : (profilePic : string) => void,
 }
 
 export const useAuthStore = create<AuthStore>((set) =>({
@@ -21,6 +23,7 @@ export const useAuthStore = create<AuthStore>((set) =>({
     isSigningin : false,
     isLogginingin : false,
     isLogginout : false,
+    isUpdatingProfile : false,
 
     checkAuth : async () => {
         try {
@@ -72,6 +75,19 @@ export const useAuthStore = create<AuthStore>((set) =>({
             toast.error(error.response.data.message)
         } finally {
             set({isLogginout : false})
+        }
+    },
+
+    updateProfile : async(profilePic : string) => {
+        set({isUpdatingProfile : true})
+        try {
+            const response = await axiosInstance.put('/auth/updateProfile',{ profilePic })
+            set({authUser : response.data.data})
+            toast.success("Profile Update Successfully!")
+        } catch (error : any) {
+            toast.error(error.response.data.message)
+        } finally{
+            set({isUpdatingProfile : false})
         }
     }
 
