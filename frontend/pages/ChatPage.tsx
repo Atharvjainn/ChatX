@@ -12,6 +12,7 @@ import ProfileHeader from "@/components/ProfileHeader"
 import ChatHeader from "@/components/ChatHeader"
 import NoChatSelected from "@/components/NoChatSelected"
 import { div } from "framer-motion/client"
+import NoMessages from "@/components/NoMessages"
 
 export default function ChatPage() {
   const {isLogginout,Logout} = useAuthStore()
@@ -42,13 +43,14 @@ export default function ChatPage() {
       :<main className="flex flex-1 flex-col">
         
         {/* CHAT HEADER */}
-        <div className="border-b border-white/10 bg-white/5  py-1 backdrop-blur-xl">
+        <div className="border-b border-white/10 bg-white/10  py-1 backdrop-blur-xl">
           <ChatHeader />
         </div>
 
         {/* CHAT BODY */}
         <div className="flex-1 overflow-y-auto px-6 py-4 text-white/60">
-          <p>This is where messages will appear.</p>
+          {/* <p>This is where messages will appear.</p> */}
+          <NoMessages />
         </div>
 
         {/* INPUT */}
