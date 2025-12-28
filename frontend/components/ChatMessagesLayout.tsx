@@ -1,5 +1,5 @@
 import { useChatStore } from '@/store/useChatStore';
-import { useEffect } from 'react';
+import { useEffect,useRef } from 'react';
 import MessagesLoading from '@/components/MessagesLoading';
 import { useAuthStore } from '@/store/useAuthStore';
 import { Message } from '@/utils/types';
@@ -14,6 +14,15 @@ const ChatMessagesLayout = () => {
   } = useChatStore();
 
   const { authUser } = useAuthStore();
+  const scrollref = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+  scrollref.current?.scrollIntoView({ behavior: 'smooth' });
+};
+
+  useEffect(() => {
+  scrollToBottom();
+}, [chatmesages]);
 
   useEffect(() => {
     if (selectedUser?._id) {
@@ -30,7 +39,7 @@ const ChatMessagesLayout = () => {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
+    <div className="flex-1 min-h-0 overflow-y-auto px-6 py-6 space-y-4">
       {chatmesages?.map((msg: Message,i : number) => {
         const isSender = msg.senderId === authUser?._id;
 
@@ -59,6 +68,7 @@ const ChatMessagesLayout = () => {
           </div>
         );
       })}
+      <div ref={scrollref}/>
     </div>
   );
 };

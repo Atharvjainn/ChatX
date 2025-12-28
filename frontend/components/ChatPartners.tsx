@@ -12,7 +12,6 @@ const ChatPartners = () => {
 
     if(isUsersLoading) return <ContactsLoader />
 
-    console.log(chatPartners);
 
     if(chatPartners.length==0) return <EmptyContactsState />
     

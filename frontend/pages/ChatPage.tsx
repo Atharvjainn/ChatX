@@ -1,9 +1,7 @@
 "use client"
 
 import ActiveTabSwitch from "@/components/ActiveTabSwitch"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-
+import { useRef, useState,useEffect } from "react"
 import Contacts from "@/components/Contacts"
 import { useAuthStore } from "@/store/useAuthStore"
 import { useChatStore } from "@/store/useChatStore"
@@ -11,14 +9,21 @@ import ChatPartners from "@/components/ChatPartners"
 import ProfileHeader from "@/components/ProfileHeader"
 import ChatHeader from "@/components/ChatHeader"
 import NoChatSelected from "@/components/NoChatSelected"
-import { div } from "framer-motion/client"
-import NoMessages from "@/components/NoMessages"
 import ChatMessagesLayout from "@/components/ChatMessagesLayout"
 import ChatFooter from "@/components/ChatFooter"
 
 export default function ChatPage() {
   const {isLogginout,Logout} = useAuthStore()
   const { activeTab,selectedUser,chatmesages } = useChatStore()
+  const scrollref = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+  scrollref.current?.scrollIntoView({ behavior: 'smooth' });
+};
+
+  useEffect(() => {
+  scrollToBottom();
+}, [chatmesages]);
 
   return (
     <div className="flex h-10/12 w-full max-w-6xl bg-linear-to-b backdrop-blur-lg from-black/20 via-black/40 to-black/90 shadow-lg overflow-hidden rounded-2xl">
@@ -42,7 +47,7 @@ export default function ChatPage() {
       {/* RIGHT CHAT AREA */}
       {!selectedUser ? 
       <NoChatSelected />
-      :<main className="flex flex-1 flex-col">
+      :<main className="flex flex-1 flex-col h-full">
         
         {/* CHAT HEADER */}
         <div className="border-b border-white/10 bg-white/10  py-1 backdrop-blur-xl">
@@ -50,13 +55,14 @@ export default function ChatPage() {
         </div>
 
         {/* CHAT BODY */}
-        <div className="flex-1 overflow-y-auto px-6 py-4 text-white/60 flex items-center">
+        <div className="flex-1 min-h-0 overflow-y-auto px-6 py-4 text-white/60 ">
          <ChatMessagesLayout />
           {/* <p>This is where messages will appear.</p> */}
         </div>
 
         {/* INPUT */}
         <ChatFooter />
+        <div ref={scrollref} />
       </main>}
     </div>
   )
