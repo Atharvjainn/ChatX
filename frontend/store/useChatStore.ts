@@ -18,6 +18,8 @@ type ChatStore = {
     getChatMessages : (UserId : string | undefined) => void,
     ismessagesloading : boolean,
     sendMessage : (data : {text : string,image : string,UserId : string | undefined}) => void,
+    subscribeToMessages : () => void,
+    UnsubscribeFromMessages : () => void,
 }
 
 export const useChatStore = create<ChatStore>((set,get) => ({
@@ -96,6 +98,26 @@ export const useChatStore = create<ChatStore>((set,get) => ({
             set({ chatmesages: chatmesages });
             toast.error(error.response.data.message || "Something went wrong")
         }
+     },
+
+     subscribeToMessages : () => {
+        const { selectedUser } = get()
+        if(!selectedUser) return 
+
+        const socket = useAuthStore.getState().socket
+
+        socket?.on('newMessage',(newMessage) => {
+            const ismessagesentfromselecteduser = newMessage.senderId === selectedUser._id
+            if(!ismessagesentfromselecteduser) return 
+
+            const messages = get().chatmesages
+            set({chatmesages : [...messages,newMessage]})
+        })
+     },
+
+     UnsubscribeFromMessages : () => {
+        const socket = useAuthStore.getState().socket
+        socket?.off('newMessage')
      }
 
 

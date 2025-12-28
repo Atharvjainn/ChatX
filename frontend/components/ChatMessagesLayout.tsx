@@ -10,7 +10,7 @@ const ChatMessagesLayout = () => {
     chatmesages,
     getChatMessages,
     ismessagesloading,
-    selectedUser,
+    selectedUser,subscribeToMessages,UnsubscribeFromMessages
   } = useChatStore();
 
   const { authUser } = useAuthStore();
@@ -24,11 +24,15 @@ const ChatMessagesLayout = () => {
   scrollToBottom();
 }, [chatmesages]);
 
-  useEffect(() => {
-    if (selectedUser?._id) {
-      getChatMessages(selectedUser._id);
-    }
-  }, [getChatMessages, selectedUser?._id]);
+    useEffect(() => {
+      if (selectedUser?._id) {
+        getChatMessages(selectedUser._id);
+      }
+      subscribeToMessages()
+
+      return () => UnsubscribeFromMessages()
+      
+    }, [getChatMessages, selectedUser?._id,subscribeToMessages,UnsubscribeFromMessages]);
 
   if (ismessagesloading) {
     return <MessagesLoading />;
