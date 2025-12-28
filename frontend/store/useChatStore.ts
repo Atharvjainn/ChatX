@@ -13,6 +13,9 @@ type ChatStore = {
     getChatPartners : () => void,
     selectedUser : User | null,
     setSelectedUser : (user : User | null) => void,
+    chatmesages : any[],
+    getChatMessages : (UserId : string | undefined) => void,
+    ismessagesloading : boolean,
 }
 
 export const useChatStore = create<ChatStore>((set) => ({
@@ -21,6 +24,8 @@ export const useChatStore = create<ChatStore>((set) => ({
     allContacts : [],
     chatPartners : [],
     selectedUser : null,
+    chatmesages : [],
+    ismessagesloading : false,
     
     setActiveTab : (tab : string) => {
         set({activeTab : tab})
@@ -50,9 +55,19 @@ export const useChatStore = create<ChatStore>((set) => ({
         }
     },
 
-    setSelectedUser : (user : User | null) => set({selectedUser : user})
+    setSelectedUser : (user : User | null) => set({selectedUser : user}),
 
-     
+     getChatMessages : async(UserId : string | undefined) => {
+        set({ismessagesloading : true})
+        try {
+            const response = await axiosInstance.get(`/messages/${UserId}`)
+            set({chatmesages : response.data})
+        } catch (error : any) {
+            toast.error(error.response.data.message)
+        } finally {
+            set({ismessagesloading : false})
+        }
+     }
 
 
 }))

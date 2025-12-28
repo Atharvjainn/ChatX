@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react"
 
 const NoMessages = () => {
   return (
-    <div className="flex h-full flex-col items-center justify-center text-center px-6">
+    <div className="flex flex-1 h-full flex-col items-center justify-center text-center px-6">
       
       {/* Icon */}
       <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/10 backdrop-blur-md">

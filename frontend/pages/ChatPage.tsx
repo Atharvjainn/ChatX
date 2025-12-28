@@ -13,10 +13,11 @@ import ChatHeader from "@/components/ChatHeader"
 import NoChatSelected from "@/components/NoChatSelected"
 import { div } from "framer-motion/client"
 import NoMessages from "@/components/NoMessages"
+import ChatMessagesLayout from "@/components/ChatMessagesLayout"
 
 export default function ChatPage() {
   const {isLogginout,Logout} = useAuthStore()
-  const { activeTab,selectedUser } = useChatStore()
+  const { activeTab,selectedUser,chatmesages } = useChatStore()
 
   return (
     <div className="flex h-10/12 w-full max-w-6xl bg-linear-to-b backdrop-blur-lg from-black/20 via-black/40 to-black/90 shadow-lg overflow-hidden rounded-2xl">
@@ -48,9 +49,9 @@ export default function ChatPage() {
         </div>
 
         {/* CHAT BODY */}
-        <div className="flex-1 overflow-y-auto px-6 py-4 text-white/60">
+        <div className="flex-1 overflow-y-auto px-6 py-4 text-white/60 flex items-center">
+         <ChatMessagesLayout />
           {/* <p>This is where messages will appear.</p> */}
-          <NoMessages />
         </div>
 
         {/* INPUT */}

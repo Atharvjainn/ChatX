@@ -7,3 +7,13 @@ export interface User {
   createdAt: string;
   updatedAt: string;
 }
+
+
+export interface Message {
+  senderId : string,
+  receiverId : string,
+  text : string,
+  image : string,
+  createdAt: string;
+  updatedAt: string;
+}
