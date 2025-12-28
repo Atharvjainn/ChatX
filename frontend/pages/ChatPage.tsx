@@ -14,6 +14,7 @@ import NoChatSelected from "@/components/NoChatSelected"
 import { div } from "framer-motion/client"
 import NoMessages from "@/components/NoMessages"
 import ChatMessagesLayout from "@/components/ChatMessagesLayout"
+import ChatFooter from "@/components/ChatFooter"
 
 export default function ChatPage() {
   const {isLogginout,Logout} = useAuthStore()
@@ -55,13 +56,7 @@ export default function ChatPage() {
         </div>
 
         {/* INPUT */}
-        <div className="border-t border-white/10 bg-white/5 px-6 py-4 backdrop-blur-xl">
-          <input
-            type="text"
-            placeholder="Type a message..."
-            className="w-full rounded-lg bg-white/10 px-4 py-2 text-white placeholder:text-white/40 focus:outline-none"
-          />
-        </div>
+        <ChatFooter />
       </main>}
     </div>
   )

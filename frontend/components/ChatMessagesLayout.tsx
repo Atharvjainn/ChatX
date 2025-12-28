@@ -1,5 +1,5 @@
 import { useChatStore } from '@/store/useChatStore';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import MessagesLoading from '@/components/MessagesLoading';
 import { useAuthStore } from '@/store/useAuthStore';
 import { Message } from '@/utils/types';

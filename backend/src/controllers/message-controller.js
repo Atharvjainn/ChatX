@@ -30,8 +30,6 @@ export const getMessagebyOtherUserId = async(req,res) => {
                 {senderId : otheruserId , receiverId : loggedInUserId}
             ]
         })
-        console.log(messages);
-
         return res.status(200).json(messages)
         
     } catch (error) {

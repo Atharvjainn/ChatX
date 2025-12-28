@@ -16,6 +16,7 @@ type ChatStore = {
     chatmesages : any[],
     getChatMessages : (UserId : string | undefined) => void,
     ismessagesloading : boolean,
+    sendMessage : (data : {text : string,image : string,UserId : string | undefined}) => void,
 }
 
 export const useChatStore = create<ChatStore>((set) => ({
@@ -66,6 +67,20 @@ export const useChatStore = create<ChatStore>((set) => ({
             toast.error(error.response.data.message)
         } finally {
             set({ismessagesloading : false})
+        }
+     },
+
+     sendMessage : async(data : {text : string,image : string,UserId : string | undefined}) => {
+        try {
+            const {text,image,UserId} = data
+            const response = await axiosInstance.post(`/messages/send/${UserId}`,{text,image})
+            set((state) => ({
+                chatmesages : [...state.chatmesages , response.data]
+            }))
+        } catch (error :any) {
+            console.log(error);
+            
+            toast.error(error.response.data.message)
         }
      }
 
