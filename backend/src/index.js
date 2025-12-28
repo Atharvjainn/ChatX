@@ -5,7 +5,7 @@ import messageRoutes from './routes/message-routes.js'
 import { connectDB } from "./config/db.js";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
-const app = express();
+import { app, server } from "./config/socket.js";
 
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }))
@@ -20,7 +20,7 @@ app.use("/api/messages", messageRoutes);
 
 
 const startServer = async () => {
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 })
     await connectDB();

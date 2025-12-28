@@ -13,7 +13,7 @@ import ChatMessagesLayout from "@/components/ChatMessagesLayout"
 import ChatFooter from "@/components/ChatFooter"
 
 export default function ChatPage() {
-  const {isLogginout,Logout} = useAuthStore()
+  const {onlineUsers} = useAuthStore()
   const { activeTab,selectedUser,chatmesages } = useChatStore()
   const scrollref = useRef<HTMLDivElement | null>(null);
 
@@ -23,6 +23,8 @@ export default function ChatPage() {
 
   useEffect(() => {
   scrollToBottom();
+  console.log(onlineUsers);
+  
 }, [chatmesages]);
 
   return (
