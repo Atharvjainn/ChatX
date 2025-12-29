@@ -86,7 +86,8 @@ export const useChatStore = create<ChatStore>((set,get) => ({
             createdAt : new Date().toISOString(),
             isOptimistic : true,
         }
-        
+
+        console.log(optimisticmessage);
         set({chatmesages : [...chatmesages,optimisticmessage]})
         
         

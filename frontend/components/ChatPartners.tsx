@@ -53,11 +53,11 @@ const ChatPartners = () => {
                 <span className="text-sm font-medium">
                   {contact.fullName}
                 </span>
-                {activeTab === "chats" && (
+                {/* {activeTab === "chats" && (
                   <span className="text-xs text-white/50">
                     Last message preview...
                   </span>
-                )}
+                )} */}
               </div>
             </div>
           ))}

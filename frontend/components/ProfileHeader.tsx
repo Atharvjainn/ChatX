@@ -9,17 +9,17 @@ const ProfileHeader = () => {
     const [selectedImg,setSelectedImg] = useState<string | null>(null)
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
-  const file = e.target.files?.[0];
-  if (!file) return;
+      const file = e.target.files?.[0];
+      if (!file) return;
 
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  
-  reader.onloadend = async (): Promise<void> => {
-    const base64Image = reader.result as string;
-    setSelectedImg(base64Image);
-     updateProfile( base64Image );
-  };
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      
+      reader.onloadend = async () : Promise<void> => {
+        const base64Image = reader.result as string;
+        setSelectedImg(base64Image);
+        updateProfile( base64Image );
+      };
 };
         
     

@@ -28,10 +28,12 @@ export default function ChatPage() {
 }, [chatmesages]);
 
   return (
-    <div className="flex h-10/12 w-full max-w-6xl bg-linear-to-b backdrop-blur-lg from-black/20 via-black/40 to-black/90 shadow-lg overflow-hidden rounded-2xl">
+    <div className="flex h-10/12 w-full max-w-6xl bg-linear-to-b backdrop-blur-lg from-black/20 via-black/40 to-black/90 shadow-lg overflow-hidden rounded-2xl ">
       
       {/* LEFT SIDEBAR */}
-      <aside className="flex w-[320px] flex-col border-r border-white/10 bg-white/10 backdrop-blur-xl">
+      <aside className={`flex lg:w-[320px] w-full flex-col border-r border-white/10 bg-white/10 backdrop-blur-xl
+        ${selectedUser ? " max-lg: hidden" : "" } lg:flex 
+        `}>
         
         {/* TOP BAR */}
         <ProfileHeader />
@@ -49,7 +51,7 @@ export default function ChatPage() {
       {/* RIGHT CHAT AREA */}
       {!selectedUser ? 
       <NoChatSelected />
-      :<main className="flex flex-1 flex-col h-full">
+      :<main className={`flex flex-1 flex-col h-full ${selectedUser ? "" : " max-lg:hidden"}`}>
         
         {/* CHAT HEADER */}
         <div className="border-b border-white/10 bg-white/10  py-1 backdrop-blur-xl">

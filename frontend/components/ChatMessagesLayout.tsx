@@ -60,6 +60,10 @@ const ChatMessagesLayout = () => {
                     : 'bg-black text-gray-100 rounded-bl-md'
                 }`}
             >
+              {msg.image && (
+                    <img src={msg.image} alt="message image" className="rounded-lg max-w-60 max-h-45 object-cover"
+                    />
+                  )}
               <p>{msg.text}</p>
 
               <span className="block text-[10px] mt-1 opacity-70 text-right">
