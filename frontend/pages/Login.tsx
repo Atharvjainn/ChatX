@@ -21,11 +21,11 @@ export default function SignupPage() {
 
 
   return (
-      <Card className="w-full max-w-4xl overflow-hidden bg-[#0b0f1a]/90 backdrop-blur-xl border border-white/10 shadow-2xl px-4">
+      <Card className="w-full max-w-4xl overflow-hidden bg-[#0b0f1a]/90 backdrop-blur-xl border border-white/10 shadow-2xl px-4 max-vs:px-1">
         <CardContent className="grid md:grid-cols-2 p-0">
 
           {/* LEFT: FORM */}
-          <div className="p-8 sm:px-5">
+          <div className="p-8 sm:px-5 max-vs:py-2">
             <form onSubmit={handleSubmit} className="space-y-6">
               <FieldSet>
                   <FieldLegend className="text-white text-2xl">Log in</FieldLegend>

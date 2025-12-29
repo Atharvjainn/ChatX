@@ -18,7 +18,7 @@ const page = () => {
     if(authUser) redirect('/chats')
 
       return (
-            <section className='h-screen w-screen flex justify-center items-center'>
+            <section className='h-screen w-screen flex justify-center items-center px-8'>
                 <SignUp />
             </section>
             

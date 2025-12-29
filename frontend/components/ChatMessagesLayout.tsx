@@ -61,10 +61,10 @@ const ChatMessagesLayout = () => {
                 }`}
             >
               {msg.image && (
-                    <img src={msg.image} alt="message image" className="rounded-lg max-w-60 max-h-45 object-cover"
+                    <img src={msg.image} alt="message image" className="rounded-lg max-w-60 max-h-45 object-cover max-sm:size-40 max-vs:size-30"
                     />
                   )}
-              <p>{msg.text}</p>
+              <p className='mt-2'>{msg.text}</p>
 
               <span className="block text-[10px] mt-1 opacity-70 text-right">
                 {new Date(msg.createdAt).toLocaleTimeString([], {

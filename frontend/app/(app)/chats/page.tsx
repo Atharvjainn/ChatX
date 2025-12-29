@@ -22,7 +22,7 @@ const page = () => {
   }
 
   return (
-    <section className='h-screen w-screen flex justify-center items-center'>
+    <section className='h-screen w-screen flex justify-center items-center px-8'>
       <ChatPage />
     </section>
         

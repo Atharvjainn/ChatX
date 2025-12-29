@@ -28,7 +28,7 @@ export default function ChatPage() {
 }, [chatmesages]);
 
   return (
-    <div className="flex h-10/12 w-full max-w-6xl bg-linear-to-b backdrop-blur-lg from-black/20 via-black/40 to-black/90 shadow-lg overflow-hidden rounded-2xl ">
+    <div className="flex h-10/12 w-full max-w-6xl bg-linear-to-b backdrop-blur-lg from-black/20 via-black/40 to-black/90 shadow-lg overflow-hidden rounded-2xl  ">
       
       {/* LEFT SIDEBAR */}
       <aside className={`flex lg:w-[320px] w-full flex-col border-r border-white/10 bg-white/10 backdrop-blur-xl
