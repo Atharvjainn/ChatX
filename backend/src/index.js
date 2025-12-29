@@ -1,5 +1,5 @@
 import express from "express";
-import { PORT,CLIENT_URL } from "./config/serverConfig.js";
+import { CLIENT_URL } from "./config/serverConfig.js";
 import authRoutes from "./routes/auth-routes.js"
 import messageRoutes from './routes/message-routes.js'
 import { connectDB } from "./config/db.js";
