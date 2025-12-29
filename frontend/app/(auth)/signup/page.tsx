@@ -15,7 +15,7 @@ const page = () => {
     //loader
     if(isCheckingAuth) return <PageLoader />
   
-    if(authUser) redirect('/chats')
+    if(authUser) redirect('/')
 
       return (
             <section className='h-screen w-screen flex justify-center items-center px-8'>
