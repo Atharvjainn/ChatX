@@ -1,6 +1,7 @@
 import { Loader, LogOut } from "lucide-react"
 import { useAuthStore } from "@/store/useAuthStore"
 import { useRef, useState } from "react"
+import { Circle } from "lucide-react"
 
 const ProfileHeader = () => {
     const {isLogginout,Logout,authUser,updateProfile,isUpdatingProfile} = useAuthStore()
@@ -35,18 +36,25 @@ const ProfileHeader = () => {
         
         {/* User info */}
         <div className="flex items-center gap-2">
+          
             <button
-              className="size-14 rounded-full overflow-hidden relative group text-white cursor-pointer flex items-center justify-center"
+              className="size-14 rounded-full  relative group text-white cursor-pointer flex items-center justify-center"
               onClick={() => fileInputRef.current?.click()}
             >
              {isUpdatingProfile ?
              <Loader className="size-10 animate-spin  "/>
-             : <img
-                src={selectedImg || authUser?.profilePic || "/avatar.png"}
-                alt="User image"
-                className="size-full object-cover"
-              />}  
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+              : <>
+                  <img
+                      src={selectedImg || authUser?.profilePic || "/avatar.png"}
+                      alt="User image"
+                      className="size-full object-cover rounded-full"/>
+                  <Circle
+                  size={10}
+                  className="absolute bottom-1 right-1 text-green-500 fill-green-500 bg-black rounded-full"
+                />
+              </>
+              }  
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-full">
                 <span className="text-white text-xs">Change</span>
               </div>
 
