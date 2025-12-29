@@ -18,6 +18,8 @@ app.use(cookieParser())
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
+const PORT = process.env.PORT || 3001
+
 
 const startServer = async () => {
     server.listen(PORT, () => {
