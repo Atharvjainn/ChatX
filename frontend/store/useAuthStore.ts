@@ -22,7 +22,7 @@ type AuthStore = {
     disconnectSocket : () => void,
 }
 
-const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3001/" : "/";
+const BASE_URL = process.env.NEXT_PUBLIC_SOCKET_URL
 
 export const useAuthStore = create<AuthStore>((set,get) =>({
     authUser : null,
