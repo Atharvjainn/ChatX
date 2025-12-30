@@ -19,6 +19,7 @@ export const generateToken = async(userId,res) => {
         httpOnly : true,
         sameSite : "none",
         secure : true,
+        path : "/",
     })
     return token
 }
