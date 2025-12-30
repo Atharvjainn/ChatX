@@ -6,14 +6,14 @@ import { useEffect } from 'react'
 import PageLoader from '@/components/PageLoader'
 
 const page = () => {
-  const {authUser, isCheckingAuth,checkAuth} = useAuthStore()
+  const {authUser, isCheckingAuth,checkAuth,isLogginout} = useAuthStore()
      
     useEffect(() => {
       checkAuth()
     },[checkAuth])
   
     //loader
-    if(isCheckingAuth) return <PageLoader />
+    if(isCheckingAuth || isLogginout ) return <PageLoader />
   
     if(authUser) redirect('/')
 

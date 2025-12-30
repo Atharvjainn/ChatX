@@ -6,14 +6,15 @@ import { redirect } from 'next/navigation'
 import { useEffect } from 'react'
 
 const page = () => {
-   const {authUser, isCheckingAuth,checkAuth} = useAuthStore()
+   const {authUser, isCheckingAuth,checkAuth,isLogginout} = useAuthStore()
    
      useEffect(() => {
+      
        checkAuth()
      },[checkAuth])
    
      //loader
-     if(isCheckingAuth) return <PageLoader />
+     if(isCheckingAuth || isLogginout) return <PageLoader />
      
      //redirect if logged in
      if(authUser) redirect('/')

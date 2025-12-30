@@ -23,8 +23,6 @@ export default function ChatPage() {
 
   useEffect(() => {
   scrollToBottom();
-  console.log(onlineUsers);
-  
 }, [chatmesages]);
 
   return (
