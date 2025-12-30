@@ -9,8 +9,7 @@ const page = () => {
    const {authUser, isCheckingAuth,checkAuth,isLogginout} = useAuthStore()
    
      useEffect(() => {
-      
-       checkAuth()
+      if(!isLogginout) checkAuth()
      },[checkAuth])
    
      //loader
