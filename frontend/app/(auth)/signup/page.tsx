@@ -15,7 +15,7 @@ const page = () => {
     //loader
     if(isCheckingAuth || isLogginout ) return <PageLoader />
   
-    if(authUser) redirect('/')
+    if(authUser && !isLogginout) redirect('/')
 
       return (
             <section className='h-screen w-screen flex justify-center items-center px-8'>
